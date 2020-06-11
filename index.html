@@ -6,34 +6,91 @@
 <title>DashBoard for iCare System</title>
 <link href="style.css" rel="stylesheet">
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script>
+
+</script>
 </head>
 <body>
 <marquee direction="left" color="red"> For Ambulance related concerns, contact : 514-581-XXXX !!!!</marquee>
-<div class="login-box">
-<h1>iCare System</h1>
-<br><br><br><br><br><br><br><br>
-<div class="dropdown">
- <button onclick="myFunction()" class="dropbtn">Log In as</button>
-  <div id="myDropdown" class="dropdown-content">
-   <a href="#Doctor">Doctor</a>
-    <a href="#Patient">Patient</a>
-  </div>
-</div>
-<div class="textbox">
-<i class="fa fa-user" aria-hidden="true"></i>
-<input type="text" placeholder="Username" name="" value="">
-</div>
-<div class="textbox">
-<i class="fa fa-lock" aria-hidden="true" color="#000000"></i>
-<input type="password" placeholder="Password" name="" value="">
-</div>
+<img src="iCare.jpg" align="right" width="550" height="500"/>
+<div class="container">
+   <div class="langWrap">
+		<a href="#" language ='english' class="active">EN</a>
+		<a href="#" language ='french'>FR</a>
+	</div>
 
-<input class="btn" type="button" name="" value="Sign in">
-<br><br>
-<font color="#000000a6" size=1px>Not Registered?</font>
-<input class="btn" type="button" name="" value="Register" >
-</div>
+<div class="content">
+	<div class="login-box">
+		<h1 class="subject">iCare System</h1>
+		<br><br><br><br><br><br><br><br>
+
+
+		<div class="dropdown">
+			<button onclick="myFunction()" class="dropbtn">Log In as</button>
+			<div id="myDropdown" class="dropdown-content">
+				<a href="#Doctor">Doctor</a>
+				<a href="#Patient">Patient</a>
+			</div> <!-- myDropdown ends -->
+	    </div> <!--dropdown ends -->
+		
+		<div class="textbox">
+			<i class="fa fa-user" aria-hidden="true"></i>
+			<input type="text" placeholder="Username" name="" value="">
+		</div>
+		
+		<div class="textbox">
+			<i class="fa fa-lock" aria-hidden="true" color="#000000"></i>
+			<input type="password" placeholder="Password" name="" value="">
+		</div> <!--textbox ends-->
+
+		<button class="btn">Sign in</button>
+			<br><br>
+			<font color="#000000a6" size=1px>Not Registered?</font>
+			<button class="registerbtn"> Register </button>
+		</div> <!--login box -->
+
+</div> <!--container ends -->
+
+
 <script>
+const langEl = document.querySelector('.langWrap');
+const link = document.querySelectorAll('a');
+const subjectEl = document.querySelector('.subject');
+const dropbtnEl = document.querySelector('.dropbtn');
+const btnEl = document.querySelector('.btn');
+const registerbtnEl = document.querySelector('.registerbtn');
+
+link.forEach(el =>{
+el.addEventListener('click',()=>{
+   langEl.querySelector('.active').classList.remove('active');
+   el.classList.add('active');
+   
+   const attr = el.getAttribute('language');
+   subjectEl.textContent = data[attr].subject;
+   dropbtnEl.textContent = data[attr].dropbtn;
+   btnEl.textContent = data[attr].btn;
+   registerbtnEl.textContent = data[attr].registerbtn;
+  });
+});
+
+var data = {
+			"english":
+				{
+				 "subject": "iCare System",
+				 "dropbtn": "Log In as",
+				 "btn": "Sign in",
+				 "registerbtn": "Register"
+				},
+			"french":
+				{
+				 "subject": "iCare Système",
+				 "dropbtn": "Se connecter en tant que",
+				 "btn": "se connecter",
+				 "registerbtn": "S'inscrire"
+				}
+            }
+
+
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function myFunction() {
