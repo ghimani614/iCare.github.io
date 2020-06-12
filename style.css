@@ -12,6 +12,9 @@ body{
 	max-width:600px;
 	height:500px;	
 }
+.hidden{
+	display:none;
+}
 a{
 text-transform:uppercase;
 color:#fff;
