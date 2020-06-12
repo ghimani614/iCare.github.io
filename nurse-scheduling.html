@@ -1,0 +1,206 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Open Sans", sans-serif;
+        }
+        .row--flex {
+            display: -webkit-box;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .row--flex > [class*="col-"] {
+            display: -webkit-box;
+            display: flex;
+        }
+        .wrapper {
+            min-height: 100vh;
+            background-color: #ddd;
+        }
+        .title {
+            margin: 30px 10px;
+            text-align: center;
+        }
+        .card {
+            margin-bottom: 30px;
+            box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+        }
+        .card__content {
+            padding: 30px;
+            text-align: center;
+        }
+        .card__img {
+            border-radius: 50%;
+            box-shadow: 0 4px 4px 1px rgba(0, 0, 0, 0.2);
+        }
+        .card__name {
+            margin: 20px 10px;
+            font-size: 24px;
+            text-transform: capitalize;
+        }
+        .card__social {
+            margin: 0 -5px;
+        }
+        .card__social-item {
+            display: inline-block;
+            width: 2em;
+            height: 2em;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            color: inherit;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+        .card__social-item:hover {
+            border-color: #64a9ff;
+            background-color: #64a9ff;
+        }
+        .card__social-item:hover .card__social-icon {
+            color: #fff;
+        }
+        .card__social-icon {
+            line-height: 2em;
+        }
+        .card__cta {
+            position: relative;
+            display: -webkit-box;
+            display: flex;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+            color: inherit;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+            /*
+                  &::before {
+                      content: '';
+                      position: absolute;
+                      top: 0;
+                      left: 50%;
+                      width: 20%;
+                      height: 1px;
+                      background-color: #ccc;
+                      transform: translateX(-50%);
+                  }
+                  */
+        }
+        .card__cta-item {
+            display: inline-block;
+            -webkit-box-flex: 1;
+            flex: 1;
+            padding: 20px;
+            border-radius: 0;
+            font-size: 1.5em;
+        }
+        .card--grid {
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            -webkit-box-flex: 1;
+            flex: 1;
+        }
+        .card--grid .card__cta {
+            margin-top: auto;
+        }
+        .numberCircle {
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            padding: 8px;
+
+            background: #2e6da4;
+            border: 2px solid #2e6da4;
+            color: #fff;
+            text-align: center;
+
+            font: 18px Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-light">
+    <a class="navbar-brand header" href="#">iCare</a>
+</nav>
+<div class="wrapper">
+    <div class="container">
+        <h1 class="title">Welcome, Nurse John Doe</h1>
+        <h4 class="subTitle">List of appointment for today</h4>
+        <div id="profileCardGrid" class="row row--flex"></div>
+    </div>
+</div>
+
+<script id="cardProfileTemplate" type="text/x-handlebars-template">
+    {{#each results}}
+    <div class="col-md-4">
+        <div class="card card--profile card--grid">
+            <div class="card__content">
+                <div class="card__cta numberCircle">{{incitement @index}}</div>
+                <div class="card__media">
+                    <img class="card__img" src="{{picture.large}}" alt="" />
+                </div>
+                <p class="card__name">{{name.first}} {{name.last}}</p>
+                <p class="card__contact-item">
+                    <strong>Age:</strong> {{dob.age}}
+                </p>
+                <p class="card__contact-item">
+                    <strong>Blood Group:</strong> O+
+                </p>
+                <p class="card__contact-item">
+                    <strong>Genotype:</strong> AA
+                </p>
+                <address class="card__contact">
+                    <p class="card__contact-item">
+                        <strong>Email:</strong> {{email}}
+                    </p>
+                    <p class="card__contact-item">
+                        <strong>Phone:</strong> {{phone}}
+                    </p>
+                </address>
+
+            </div>
+
+            <div class="card__cta">
+                <a href="" class="card__cta-item btn btn-primary">
+                    <i class="fa fa-eye card__cta-icon"></i> View Medical Record
+                </a>
+
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<script>
+    (function($) {
+        $(document).ready(function() {
+            $.ajax({
+                url: 'https://randomuser.me/api?inc=name,picture,email,dob,phone&nat=us&results=6&noinfo',
+                dataType: 'json'
+            }).done(function(data) {
+                var html = $('#cardProfileTemplate').html(),
+                    template = Handlebars.compile(html),
+                    result = template(data);
+
+                $('#profileCardGrid').append(result);
+            }).fail(function(msg) {
+                alert('Ajax failed with status: ' + msg);
+            });
+            Handlebars.registerHelper("incitement", function (inindex) {
+                return inindex + 1
+            });
+        });
+    })(jQuery);
+    Handlebars.registerHelper("incitement", function (inindex) {
+        return inindex + 1
+    });
+</script>
+</body>
+</html>
