@@ -11,7 +11,7 @@
 </script>
 </head>
 <body>
-<marquee style ="font-family: lato; color:#ff0000"> For Ambulance related concerns, contact : 514-581-XXXX !!!!</marquee>
+<marquee style ="font-family: lato; color:#ff0000"> For COVID-19 related recent updates, contact : 514-581-XXXX!!!!</marquee>
 <img src="iCare.jpg" align="right" width="550" height="500"/>
 <div class="container">
    <div class="langWrap">
@@ -42,8 +42,13 @@
 			<i class="fa fa-lock" aria-hidden="true" color="#000000"></i>
 			<input type="password" placeholder="Password" name="" value="">
 		</div> <!--textbox ends-->
-
-		<button class="btn">Sign in</button>
+		<br>
+          <label class="hidden">Kindly enter the OTP :</label>  <input type='text' name='enter OTP' class="hidden"/>
+		  <br>
+		<button class="btn" onclick="buttonclick()">Sign in</button>
+		<br>
+		<br>
+		
 			<br><br>
 			<font color="#000000a6" size=1px>Not Registered?</font>
 			<button class="registerbtn"> Register </button>
@@ -53,6 +58,15 @@
 
 
 <script>
+function buttonclick(){
+var hiddenInput = document.getElementsByClassName("hidden");
+alert('Kindly enter the OTP sent on registered email address!!');
+for(var i=0; i< hiddenInput.length; i++)
+{
+hiddenInput[i].style.display="block";
+hiddenInput[i].style.color="black";
+}
+}
 const langEl = document.querySelector('.langWrap');
 const link = document.querySelectorAll('a');
 const subjectEl = document.querySelector('.subject');
