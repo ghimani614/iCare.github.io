@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    html { font-family: sans-serif; color: #333; }
+    body { max-width: 500px; margin: 0 auto; padding: 0 15px; align: center;}
+    div, article { padding: 10px; margin: 5px; border: 1px solid #dedede; align: center; }
+</style>
+<body>
+
+<h2>List of near-by Hospital and Doctor</h2>
+
+
+<p>This service shows near by hospital and available doctor based on your health condition and location.</p>
+
+
+Your location : <select id="location" align="center" >
+    <option value="Downtown">Downtown</option>
+    <option value="LaSalle">LaSalle</option>
+    <option value="Verdun">Verdun</option>
+  </select>
+  <button type="button" onclick="onClick()">Go</button><br><br>
+  
+<script>
+function onClick(){
+document.getElementById("para").innerHTML = "We have got the real-time information"
+var e = document.getElementById("location");
+var strUser = e.options[e.selectedIndex].value;
+if (strUser=="Downtown"){
+document.getElementById("hospital").value = "Montreal General hospital";
+document.getElementById("rush").value = "Low wait time";
+document.getElementById("doctor").value = "Dr. Kim";}
+else if (strUser=="LaSalle"){
+document.getElementById("hospital").value = "Hospital de LaSalle";
+document.getElementById("rush").value = "High wait time";
+document.getElementById("doctor").value = "Dr. John";}
+else if (strUser=="Verdun"){
+document.getElementById("hospital").value = "Hospital de Verdun";
+document.getElementById("rush").value = "Moderate wait time";
+document.getElementById("doctor").value = "Dr. George";}
+}
+
+</script>
+<div align="center" ><br>
+<p id="para">Let us find you nearest service</p>
+Hospital : <input type="text" id="hospital"><br><br>
+Doctor : <input type="text" id="doctor" value=""><br><br>
+Current Situation : <input type="text" id="rush"><br><br>
+</div><br>
+</body>
+</html>
